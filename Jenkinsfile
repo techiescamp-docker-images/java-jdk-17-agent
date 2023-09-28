@@ -51,7 +51,7 @@ pipeline {
                 script {
                     try {
                         ecrRegistry(
-                            ecrRepository: "${ECR_REGISTRY}/jdk17_base_image",
+                            ecrRepository: "${ECR_REGISTRY}/infra-images",
                             imageName: "${imageName}",
                             versionTag: "${versionTag}",
                             awsRegion: "${awsRegion}"
