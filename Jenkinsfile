@@ -42,17 +42,22 @@ pipeline {
                 }
             }
         }
-        stage('Send Trivy Report') {
+        stage('Push Image To ECR') {
+            when {
+                branch 'main'
+            }
             steps {
                 script {
                     try {
-                        def imageNameAndTag = "${imageName}:${versionTag}"
-                        def reportPath = "trivy-report.html"
-                        def recipient = "aswin@crunchops.com"
-                        emailReport(reportPath, imageNameAndTag, recipient)
-                    } catch (Exception emailError) {
+                        ecrRegistry(
+                            ecrRepository: "${ECR_REGISTRY}/jdk17_base_image",
+                            imageName: "${imageName}",
+                            versionTag: "${versionTag}",
+                            awsRegion: "${awsRegion}"
+                        )
+                    } catch (Exception pushError) {
                         currentBuild.result = 'FAILURE'
-                        error("Email Send failed: ${emailError}")
+                        error("Failed to push image to ECR: ${pushError}")
                     }
                 }
             }
