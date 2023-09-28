@@ -14,7 +14,7 @@ RUN addgroup --gid 1000 jenkins && \
     apt-get install -y --no-install-recommends git curl lsb-release gnupg wget openjdk-17-jdk awscli && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir -p /home/jenkins/.m2 && \
-    chown 1000:1000 /home/ubuntu/.m2 && \
+    chown 1000:1000 /home/jenkins/.m2 && \
     wget -q https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz -O /tmp/apache-maven-3.9.4-bin.tar.gz && \
     tar -xf /tmp/apache-maven-3.9.4-bin.tar.gz -C /opt/ && \
     rm /tmp/apache-maven-3.9.4-bin.tar.gz
