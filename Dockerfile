@@ -1,4 +1,3 @@
-# Use a minimal base image
 FROM ubuntu:20.04
 
 # Set one environment variable to avoid interactivity during package installation
