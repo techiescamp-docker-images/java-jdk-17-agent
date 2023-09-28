@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install required packages and clean up
 RUN apt-get update && \
     apt-get install -y --no-install-recommends git curl lsb-release gnupg wget openjdk-17-jdk awscli && \
-    rm -rf /var/lib/apt/lists/* \
+    rm -rf /var/lib/apt/lists/* && \
     mkdir -p /var/maven/.m2 && chown 1000:1000 /var/maven/.m2
 
 # Install Maven
