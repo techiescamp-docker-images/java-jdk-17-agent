@@ -1,5 +1,5 @@
 # Use a minimal base image to reduce the image size
-FROM ubuntu:23.10
+FROM ubuntu:20.04
 
 # Set environment variables separately
 ENV MAVENCONFIG=/home/ubuntu/.m2
@@ -10,8 +10,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Create a user group, user, and install required packages in a single RUN to reduce layers
 RUN addgroup --gid 1000 jenkins && \
     adduser --uid 1000 --gid 1000 --home /home/jenkins --disabled-password --gecos "" jenkins && \
-    apt update && \
-    apt install -y git curl lsb-release gnupg wget openjdk-17-jdk awscli && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends git curl lsb-release gnupg wget openjdk-17-jdk awscli && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir -p /home/ubuntu/.m2 && \
     chown 1000:1000 /home/ubuntu/.m2 && \
