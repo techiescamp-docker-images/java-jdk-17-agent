@@ -2,7 +2,7 @@
 
 def awsRegion = "us-west-2"
 def imageName = "java-jdk-17-agent"
-def versionTag = "1.0.0"
+def versionTag = "1.0.1"
 
 pipeline {
     agent {
