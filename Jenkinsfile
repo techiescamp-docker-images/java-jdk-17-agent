@@ -1,7 +1,7 @@
 @Library('jenkins-shared-library@develop') _
 
 def awsRegion = "us-west-2"
-def imageName = "jdk17_base_image"
+def imageName = "java-jdk-17-agent"
 def versionTag = "1.0.0"
 
 pipeline {
