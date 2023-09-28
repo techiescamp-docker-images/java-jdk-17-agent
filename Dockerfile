@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install -y --no-install-recommends git curl lsb-release gnupg wget openjdk-17-jdk awscli && \
     useradd -m ubuntu && \
-    chown -R ubuntu:ubuntu /home/ubuntu/.m2 && \
+    mkdir -p /home/ubuntu/.m2 && chown -R ubuntu:ubuntu /home/ubuntu/.m2 && \
     rm -rf /var/lib/apt/lists/*
 
 # Set remaining environment variables
