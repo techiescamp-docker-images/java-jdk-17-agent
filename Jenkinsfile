@@ -1,9 +1,5 @@
 @Library('jenkins-shared-library@develop') _
 
-def awsRegion = "us-west-2"
-def imageName = "java-jdk-17-agent"
-def versionTag = "1.0.1"
-
 pipeline {
     agent {
         label 'AGENT-01'
@@ -20,8 +16,7 @@ pipeline {
                 script {
                     try {
                         dockerBuild(
-                            versionTag: versionTag,
-                            imageName: imageName
+                            imageName: 'java-jdk-17-agent'
                         )
                     } catch (Exception buildError) {
                         currentBuild.result = 'FAILURE'
@@ -34,8 +29,8 @@ pipeline {
             steps {
                 script {
                     try {
-                        def imageNameAndTag = "${imageName}:${versionTag}"
-                        trivyScan(imageNameAndTag)
+                        def imageName = "java-jdk-17-agent"
+                        trivyScan(imageName)
                     } catch (Exception trivyError) {
                         currentBuild.result = 'FAILURE'
                         error("Trivy scan failed: ${trivyError}")
@@ -51,10 +46,8 @@ pipeline {
                 script {
                     try {
                         ecrRegistry(
-                            ecrRepository: "${ECR_REGISTRY}/infra-images",
-                            imageName: "${imageName}",
-                            versionTag: "${versionTag}",
-                            awsRegion: "${awsRegion}"
+                            imageName: 'java-jdk-17-agent',
+                            repoName: 'infra-images',
                         )
                     } catch (Exception pushError) {
                         currentBuild.result = 'FAILURE'
