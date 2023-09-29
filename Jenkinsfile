@@ -38,6 +38,20 @@ pipeline {
                 }
             }
         }
+        stage('Send Trivy Report') {
+            steps {
+                script {
+                    try {
+                        def reportPath = "${WORKSPACE}/trivy-report.html"
+                        def recipient = "aswin@crunchops.com"
+                        emailReport(reportPath, recipient)
+                    } catch (Exception emailError) {
+                        currentBuild.result = 'FAILURE'
+                        error("Email Send failed: ${emailError}")
+                    }
+                }
+            }
+        }
         stage('Push Image To ECR') {
             when {
                 branch 'main'
