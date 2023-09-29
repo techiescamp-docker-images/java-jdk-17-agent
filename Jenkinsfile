@@ -61,7 +61,7 @@ pipeline {
                     try {
                         ecrRegistry(
                             imageName: 'java-jdk-17-agent',
-                            repoName: 'infra-images',
+                            repoName: 'base-image',
                         )
                     } catch (Exception pushError) {
                         currentBuild.result = 'FAILURE'
